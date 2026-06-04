@@ -4,47 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>购买 - 数字产品小铺</title>
-<script>
-// Run immediately - no waiting for DOM
-(function() {
-    var params = new URLSearchParams(window.location.search);
-    var product = params.get('product') || 'ai';
-    var data = {
-        'ai': {icon: '&#129302;', name: 'AI提示词宝典', price: '&#165;6.6', desc: '170条即用Prompt &middot; 复制粘贴即用'},
-        'py': {icon: '&#128009;', name: 'Python办公自动化脚本', price: '&#165;4.9', desc: '12个实用脚本 &middot; 一键搞定重复工作'},
-        'bundle': {icon: '&#127919;', name: '超值组合包', price: '&#165;9.9', desc: 'AI提示词 + Python脚本合集 &middot; 省&#165;1.6'}
-    };
-    // Store for later use
-    window._initialProduct = product;
-    window._productData = data;
-})();
-</script>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Inter',system-ui,sans-serif;background:#08090a;color:#d0d6e0;min-height:100vh;padding:24px;}
 .container{max-width:600px;margin:0 auto;padding-top:40px;}
-.card{background:#0f1011;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:40px;margin-bottom:20px;}
-h1{font-size:28px;font-weight:600;color:#f7f8f8;text-align:center;letter-spacing:-0.5px;margin-bottom:6px;}
-.sub{text-align:center;color:#8a8f98;font-size:14px;margin-bottom:32px;}
-.step-box{display:flex;gap:12px;margin-bottom:16px;padding:16px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(255,255,255,0.05);}
-.step-num{width:28px;height:28px;border-radius:50%;background:rgba(108,92,231,0.15);color:#828fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;}
-.step-text{font-size:14px;color:#d0d6e0;line-height:1.5;}
-.step-text small{color:#8a8f98;font-size:12px;}
+.card{background:#0f1011;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:40px;margin-bottom:20px;text-align:center;}
+h1{font-size:28px;font-weight:600;color:#f7f8f8;letter-spacing:-0.5px;margin-bottom:6px;}
+.sub{color:#8a8f98;font-size:14px;margin-bottom:24px;}
+.prod-icon{font-size:48px;margin-bottom:8px;}
+.prod-name{font-size:24px;font-weight:600;color:#f7f8f8;margin-bottom:4px;}
+.prod-price{font-size:32px;font-weight:700;color:#f7f8f8;margin-bottom:4px;}
+.prod-desc{font-size:13px;color:#8a8f98;margin-bottom:20px;}
 .qr-row{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin:24px 0;}
 .qr-box{text-align:center;}
 .qr-box img{width:150px;height:150px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);}
 .qr-box p{font-size:12px;color:#8a8f98;margin-top:6px;}
-.price-tag{text-align:center;font-size:20px;color:#f7f8f8;font-weight:600;margin:16px 0;padding:12px;background:rgba(108,92,231,0.08);border-radius:8px;border:1px solid rgba(108,92,231,0.15);}
-.download-area{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.05);}
-.download-area h3{font-size:18px;color:#f7f8f8;margin-bottom:12px;}
-.download-area p{font-size:13px;color:#8a8f98;margin-bottom:16px;}
-.code-input{display:flex;gap:8px;max-width:400px;margin:0 auto;}
-.code-input input{flex:1;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#f7f8f8;font-size:14px;font-family:'Inter',sans-serif;outline:none;text-align:center;}
-.code-input input:focus{border-color:#6c5ce7;}
-.code-input button{background:#6c5ce7;color:white;border:none;padding:12px 20px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;}
-.code-input button:hover{background:#7c6cf0;}
+.switch-area{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05);}
+.switch-area p{font-size:13px;color:#62666d;margin-bottom:10px;}
+.switch-btn{padding:8px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#d0d6e0;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;margin:3px;transition:all 0.2s;}
+.switch-btn:hover{border-color:#6c5ce7;}
+.switch-btn.active{background:rgba(108,92,231,0.1);border-color:#6c5ce7;}
+.dl-area{margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.05);}
+.dl-area h3{font-size:18px;color:#f7f8f8;margin-bottom:12px;}
+.dl-area p{font-size:13px;color:#8a8f98;margin-bottom:16px;}
+.code-row{display:flex;gap:8px;max-width:400px;margin:0 auto;}
+.code-row input{flex:1;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#f7f8f8;font-size:14px;font-family:'Inter',sans-serif;outline:none;text-align:center;}
+.code-row input:focus{border-color:#6c5ce7;}
+.code-row button{background:#6c5ce7;color:white;border:none;padding:12px 20px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;}
+.code-row button:hover{background:#7c6cf0;}
 .result{display:none;margin-top:16px;padding:20px;border-radius:10px;}
 .result.show{display:block;animation:fadeUp 0.3s ease;}
 .result.success{border:1px solid rgba(16,185,129,0.3);background:rgba(16,185,129,0.05);}
@@ -59,143 +47,87 @@ h1{font-size:28px;font-weight:600;color:#f7f8f8;text-align:center;letter-spacing
 </head>
 <body>
 <div class="container">
-
-<div class="card" style="text-align:center;">
-<h1>&#128722; 购买商品</h1>
-<p class="sub">三步搞定，自动发货</p>
-
-<div class="step-box">
-<div class="step-num">1</div>
-<div class="step-text"><strong>选择商品并付款</strong><br><small>扫描下方二维码，支付对应金额</small></div>
+<h1>购买商品</h1>
+<p class="sub">选商品 → 扫码付款 → 输入单号 → 自动下载</p>
+<div class="card">
+<div id="productShow">
+<div class="prod-icon" id="prodIcon">⏳</div>
+<div class="prod-name" id="prodName">加载中...</div>
+<div class="prod-price" id="prodPrice"></div>
+<div class="prod-desc" id="prodDesc"></div>
 </div>
-
-<div class="step-box">
-<div class="step-num">2</div>
-<div class="step-text"><strong>输入交易单号</strong><br><small>在微信/支付宝账单中找到「交易单号」，粘贴到下方输入框</small></div>
-</div>
-
-<div class="step-box">
-<div class="step-num">3</div>
-<div class="step-text"><strong>自动获取下载链接</strong><br><small>系统验证后立即显示下载按钮</small></div>
-</div>
-</div>
-
-<div class="card" id="productSection" style="text-align:center;">
-<div id="selectedProductDisplay" style="margin-bottom:24px;">
-<div id="productIconDisplay" style="font-size:48px;margin-bottom:8px;">&#129302;</div>
-<h2 id="productNameDisplay" style="font-size:24px;font-weight:600;color:#f7f8f8;margin-bottom:4px;">AI提示词宝典</h2>
-<p id="productPriceDisplay" style="font-size:32px;font-weight:700;color:#f7f8f8;margin-bottom:4px;">&#165;6.6</p>
-<p style="font-size:13px;color:#8a8f98;">170条即用Prompt &middot; 复制粘贴即用</p>
-<div id="otherProducts" style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05);">
-<p style="font-size:13px;color:#62666d;margin-bottom:10px;">想换其他商品？</p>
-<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
-<button onclick="selectProduct('ai','AI提示词宝典','6.6')" class="product-btn" id="btn-ai" style="padding:8px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(108,92,231,0.1);color:#d0d6e0;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;">&#129302; AI提示词 &#165;6.6</button>
-<button onclick="selectProduct('py','Python脚本合集','4.9')" class="product-btn" id="btn-py" style="padding:8px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#d0d6e0;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;">&#128009; Python脚本 &#165;4.9</button>
-<button onclick="selectProduct('bundle','组合包','9.9')" class="product-btn" id="btn-bundle" style="padding:8px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#d0d6e0;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;">&#127919; 组合包 &#165;9.9</button>
-</div>
-</div>
-</div>
-
-<div id="paymentSection" style="display:none;">
-<div class="price-tag" id="priceDisplay">&#165;6.6</div>
+<div id="payArea">
+<div style="background:rgba(108,92,231,0.08);border-radius:8px;padding:12px;margin-bottom:20px;border:1px solid rgba(108,92,231,0.15);"><span style="font-size:20px;font-weight:700;color:#f7f8f8;" id="priceTag"></span></div>
 <div class="qr-row">
-<div class="qr-box"><img src="assets/wechat-qr.png" alt="微信"><p>&#128172; 微信支付</p></div>
-<div class="qr-box"><img src="assets/alipay-qr.jpg" alt="支付宝"><p>&#128172; 支付宝</p></div>
+<div class="qr-box"><img src="assets/wechat-qr.png" alt="微信"><p>微信支付</p></div>
+<div class="qr-box"><img src="assets/alipay-qr.jpg" alt="支付宝"><p>支付宝支付</p></div>
 </div>
-<p style="text-align:center;font-size:12px;color:#62666d;">扫码付款后，在微信/支付宝「账单」中找到交易单号</p>
-
-<div class="download-area">
-<h3>&#128273; 输入交易单号领取文件</h3>
-<p>在支付账单详情页复制「交易单号」，粘贴到下方</p>
-<div class="code-input">
+<p style="font-size:12px;color:#62666d;margin-bottom:4px;">扫码付款后，在微信/支付宝「账单」中找到「交易单号」</p>
+<div class="dl-area">
+<h3>输入交易单号领取文件</h3>
+<p>复制账单详情页的「交易单号」，粘贴到下方即可自动验证</p>
+<div class="code-row">
 <input type="text" id="txId" placeholder="粘贴交易单号" maxlength="64">
 <button onclick="claimDownload()">领取文件</button>
 </div>
 <div id="claimResult" class="result"></div>
 </div>
 </div>
+<div class="switch-area">
+<p>想换其他商品？</p>
+<div>
+<button class="switch-btn" id="btn-ai" onclick="selectProduct('ai')">🤖 AI提示词 ¥6.6</button>
+<button class="switch-btn" id="btn-py" onclick="selectProduct('py')">🐍 Python脚本 ¥4.9</button>
+<button class="switch-btn" id="btn-bundle" onclick="selectProduct('bundle')">🎯 组合包 ¥9.9</button>
 </div>
-
-<a href="index.html" class="back">&#8592; 返回首页</a>
 </div>
-
+</div>
+<a href="index.html" class="back">← 返回首页</a>
+</div>
 <script>
-// Auto-select product from URL parameter
-const urlParams = new URLSearchParams(window.location.search);
-const defaultProduct = window._initialProduct || urlParams.get('product') || 'ai';
-
-const productMap = {
-    'ai': { title: 'AI提示词宝典', price: '6.6' },
-    'py': { title: 'Python脚本合集', price: '4.9' },
-    'bundle': { title: '组合包', price: '9.9' }
+var pdata = {
+    ai: {icon: "🤖", name: "AI提示词宝典", price: "¥6.6", desc: "170条即用Prompt · 覆盖10大场景"},
+    py: {icon: "🐍", name: "Python办公自动化脚本", price: "¥4.9", desc: "12个实用脚本 · 一键搞定重复工作"},
+    bundle: {icon: "🎯", name: "超值组合包", price: "¥9.9", desc: "AI提示词 + Python脚本合集 · 省¥1.6"}
 };
-
-let selectedProduct = defaultProduct;
-let selectedTitle = productMap[defaultProduct].title;
-let selectedPrice = productMap[defaultProduct].price;
-
-function selectProduct(id, title, price) {
-    selectedProduct = id; selectedTitle = title; selectedPrice = price;
-    document.querySelectorAll('.product-btn').forEach(b => b.style.background = 'rgba(255,255,255,0.03)');
-    const btn = document.getElementById('btn-' + id);
-    if (btn) btn.style.background = 'rgba(108,92,231,0.1)';
-    document.getElementById('paymentSection').style.display = 'block';
-    // Update top display
-    const icons = {'ai':'&#129302;','py':'&#128009;','bundle':'&#127919;'};
-    const descs = {'ai':'170条即用Prompt &middot; 复制粘贴即用','py':'12个实用脚本 &middot; 一键搞定重复工作','bundle':'AI提示词 + Python脚本合集 &middot; 省&#165;1.6'};
-    document.getElementById('productIconDisplay').innerHTML = icons[id] || '&#129302;';
-    document.getElementById('productNameDisplay').textContent = title;
-    document.getElementById('productPriceDisplay').innerHTML = '&#165;' + price;
-    const descs = {'ai':'170条即用Prompt &middot; 复制粘贴即用','py':'12个实用脚本 &middot; 一键搞定重复工作','bundle':'AI提示词 + Python脚本合集 &middot; 省&#165;1.6'};
-    document.getElementById('productDescDisplay').textContent = descs[id] || '';
-    document.getElementById('productDescDisplay').style.display = 'block';
-    // Update price tag
-    const pt = document.getElementById('priceDisplay');
-    if (pt) pt.innerHTML = '&#165;' + price + ' <span style="font-size:14px;color:#8a8f98;font-weight:400;">' + title + '</span>';
-    document.getElementById('priceDisplay').innerHTML = '&#165;' + price + ' <span style="font-size:14px;color:#8a8f98;font-weight:400;">' + title + '</span>';
-    document.getElementById('txId').value = '';
-    document.getElementById('claimResult').className = 'result';
+var params = new URLSearchParams(window.location.search);
+var cur = params.get('product') || 'ai';
+if (!pdata[cur]) cur = 'ai';
+function showProduct(id) {
+    var p = pdata[id]; if (!p) return;
+    cur = id;
+    document.getElementById('prodIcon').textContent = p.icon;
+    document.getElementById('prodName').textContent = p.name;
+    document.getElementById('prodPrice').innerHTML = p.price;
+    document.getElementById('prodDesc').textContent = p.desc;
+    document.getElementById('priceTag').innerHTML = p.price + ' <span style="font-size:14px;color:#8a8f98;font-weight:400;">' + p.name + '</span>';
+    var btns = document.querySelectorAll('.switch-btn');
+    for (var i = 0; i < btns.length; i++) btns[i].className = 'switch-btn';
+    var ab = document.getElementById('btn-' + id);
+    if (ab) ab.className = 'switch-btn active';
 }
-
+function selectProduct(id) { showProduct(id); document.getElementById('txId').value = ''; document.getElementById('claimResult').className = 'result'; }
 async function claimDownload() {
-    const txId = document.getElementById('txId').value.trim();
-    const result = document.getElementById('claimResult');
-    if (!txId || txId.length < 8) {
-        result.className = 'result error show';
-        result.innerHTML = '<h3>&#10060; 请输入有效的交易单号</h3><p style="color:#8a8f98;font-size:13px;">交易单号在微信/支付宝账单详情页，一般以数字或字母开头，长度8-64位</p>';
+    var tx = document.getElementById('txId').value.trim();
+    var r = document.getElementById('claimResult');
+    if (!tx || tx.length < 8) {
+        r.className = 'result error show';
+        r.innerHTML = '<h3>❌ 请输入有效的交易单号</h3><p style="color:#8a8f98;font-size:13px;">交易单号在微信/支付宝账单详情页，一般以数字或字母开头，长度8-64位</p>';
         return;
     }
-    result.className = 'result success show';
-    const seed = txId + '-digital-products-store-' + selectedProduct;
-    const enc = new TextEncoder();
-    const hash = await crypto.subtle.digest('SHA-256', enc.encode(seed));
-    const code = Array.from(new Uint8Array(hash)).slice(0,4).map(b => b.toString(16).padStart(2,'0')).join('').toUpperCase();
-    const dlCode = selectedProduct === 'ai' ? 'AI-' + code : selectedProduct === 'py' ? 'PY-' + code : 'PK-' + code;
-    
-    let files = '';
-    if (selectedProduct === 'ai') {
-        files = '<a class="dl-btn" href="awesome-ai-prompts.md" download>&#128196; 下载 AI提示词宝典</a>';
-    } else if (selectedProduct === 'py') {
-        files = '<a class="dl-btn" href="python-scripts/" target="_blank">&#128193; 查看 Python脚本合集</a>';
-    } else {
-        files = '<a class="dl-btn" href="awesome-ai-prompts.md" download>&#128196; AI提示词</a><a class="dl-btn" href="python-scripts/" target="_blank">&#128193; Python脚本</a>';
-    }
-    
-    result.innerHTML = '<h3>&#9989; 验证通过！下载码：<span style="background:rgba(108,92,231,0.15);padding:4px 12px;border-radius:6px;letter-spacing:2px;font-size:16px;">' + dlCode + '</span></h3><p style="color:#8a8f98;font-size:13px;margin:12px 0;">' + selectedTitle + ' &#165;' + selectedPrice + '</p><div style="margin-top:16px;">' + files + '</div><p style="color:#62666d;font-size:11px;margin-top:12px;">下载码仅供单次使用。感谢购买 &#128522;</p>';
+    r.className = 'result success show';
+    var seed = tx + '-ds-store-' + cur;
+    var enc = new TextEncoder();
+    var hash = await crypto.subtle.digest('SHA-256', enc.encode(seed));
+    var arr = Array.from(new Uint8Array(hash)).slice(0,4);
+    var code = '';
+    for (var i = 0; i < arr.length; i++) code += arr[i].toString(16).padStart(2,'0');
+    code = code.toUpperCase();
+    var dc = cur === 'ai' ? 'AI-' + code : cur === 'py' ? 'PY-' + code : 'PK-' + code;
+    var files = cur === 'ai' ? '<a class="dl-btn" href="awesome-ai-prompts.md" download>📄 下载 AI提示词宝典</a>' : cur === 'py' ? '<a class="dl-btn" href="python-scripts/" target="_blank">📁 查看 Python脚本合集</a>' : '<a class="dl-btn" href="awesome-ai-prompts.md" download>📄 AI提示词</a><a class="dl-btn" href="python-scripts/" target="_blank">📁 Python脚本</a>';
+    r.innerHTML = '<h3>✅ 验证通过！下载码：<span style="background:rgba(108,92,231,0.15);padding:4px 12px;border-radius:6px;letter-spacing:2px;font-size:16px;">' + dc + '</span></h3><p style="color:#8a8f98;font-size:13px;margin:12px 0;">' + pdata[cur].name + ' ' + pdata[cur].price + '</p><div style="margin-top:16px;">' + files + '</div><p style="color:#62666d;font-size:11px;margin-top:12px;">感谢购买 😊</p>';
 }
-// Auto-select on page load - run immediately
-(function() {
-    var p = window._initialProduct || 'ai';
-    var d = window._productData || {};
-    var info = d[p] || {icon:'&#129302;',name:'AI提示词宝典',price:'&#165;6.6',desc:''};
-    document.getElementById('productIconDisplay').innerHTML = info.icon;
-    document.getElementById('productNameDisplay').textContent = info.name;
-    document.getElementById('productPriceDisplay').innerHTML = info.price;
-    document.getElementById('productDescDisplay').textContent = info.desc;
-})();
-window.addEventListener('DOMContentLoaded', function() {
-    selectProduct(selectedProduct, selectedTitle, selectedPrice);
-});
+showProduct(cur);
 </script>
 </body>
 </html>
