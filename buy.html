@@ -64,12 +64,20 @@ h1{font-size:28px;font-weight:600;color:#f7f8f8;text-align:center;letter-spacing
 </div>
 </div>
 
-<div class="card" id="productSection">
-<h2 style="font-size:20px;color:#f7f8f8;text-align:center;margin-bottom:20px;">选择要购买的商品</h2>
-<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-<button onclick="selectProduct('ai','AI提示词宝典','6.6')" class="product-btn" id="btn-ai" style="padding:12px 20px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(108,92,231,0.1);color:#f7f8f8;cursor:pointer;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;">&#129302; AI提示词 &#165;6.6</button>
-<button onclick="selectProduct('py','Python脚本合集','4.9')" class="product-btn" id="btn-py" style="padding:12px 20px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#f7f8f8;cursor:pointer;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;">&#128009; Python脚本 &#165;4.9</button>
-<button onclick="selectProduct('bundle','组合包','9.9')" class="product-btn" id="btn-bundle" style="padding:12px 20px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#f7f8f8;cursor:pointer;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;">&#127919; 组合包 &#165;9.9</button>
+<div class="card" id="productSection" style="text-align:center;">
+<div id="selectedProductDisplay" style="margin-bottom:24px;">
+<div id="productIconDisplay" style="font-size:48px;margin-bottom:8px;">&#129302;</div>
+<h2 id="productNameDisplay" style="font-size:24px;font-weight:600;color:#f7f8f8;margin-bottom:4px;">AI提示词宝典</h2>
+<p id="productPriceDisplay" style="font-size:32px;font-weight:700;color:#f7f8f8;margin-bottom:4px;">&#165;6.6</p>
+<p style="font-size:13px;color:#8a8f98;">170条即用Prompt &middot; 复制粘贴即用</p>
+<div id="otherProducts" style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05);">
+<p style="font-size:13px;color:#62666d;margin-bottom:10px;">想换其他商品？</p>
+<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+<button onclick="selectProduct('ai','AI提示词宝典','6.6')" class="product-btn" id="btn-ai" style="padding:8px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(108,92,231,0.1);color:#d0d6e0;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;">&#129302; AI提示词 &#165;6.6</button>
+<button onclick="selectProduct('py','Python脚本合集','4.9')" class="product-btn" id="btn-py" style="padding:8px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#d0d6e0;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;">&#128009; Python脚本 &#165;4.9</button>
+<button onclick="selectProduct('bundle','组合包','9.9')" class="product-btn" id="btn-bundle" style="padding:8px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#d0d6e0;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;">&#127919; 组合包 &#165;9.9</button>
+</div>
+</div>
 </div>
 
 <div id="paymentSection" style="display:none;">
@@ -116,6 +124,15 @@ function selectProduct(id, title, price) {
     const btn = document.getElementById('btn-' + id);
     if (btn) btn.style.background = 'rgba(108,92,231,0.1)';
     document.getElementById('paymentSection').style.display = 'block';
+    // Update top display
+    const icons = {'ai':'&#129302;','py':'&#128009;','bundle':'&#127919;'};
+    const descs = {'ai':'170条即用Prompt &middot; 复制粘贴即用','py':'12个实用脚本 &middot; 一键搞定重复工作','bundle':'AI提示词 + Python脚本合集 &middot; 省&#165;1.6'};
+    document.getElementById('productIconDisplay').innerHTML = icons[id] || '&#129302;';
+    document.getElementById('productNameDisplay').textContent = title;
+    document.getElementById('productPriceDisplay').innerHTML = '&#165;' + price;
+    // Update price tag
+    const pt = document.getElementById('priceDisplay');
+    if (pt) pt.innerHTML = '&#165;' + price + ' <span style="font-size:14px;color:#8a8f98;font-weight:400;">' + title + '</span>';
     document.getElementById('priceDisplay').innerHTML = '&#165;' + price + ' <span style="font-size:14px;color:#8a8f98;font-weight:400;">' + title + '</span>';
     document.getElementById('txId').value = '';
     document.getElementById('claimResult').className = 'result';
