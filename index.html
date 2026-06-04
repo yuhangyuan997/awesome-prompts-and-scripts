@@ -1,85 +1,129 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚀 数字产品小铺</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f0f1a; color: #e0e0e0; line-height: 1.6; }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        h1 { text-align: center; font-size: 2.5em; margin-bottom: 10px; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { text-align: center; color: #888; margin-bottom: 40px; font-size: 1.1em; }
-        .product { background: #1a1a2e; border-radius: 16px; padding: 30px; margin-bottom: 30px; border: 1px solid #2a2a4a; }
-        .product h2 { font-size: 1.5em; margin-bottom: 10px; }
-        .price { font-size: 2em; font-weight: bold; color: #4ade80; margin: 15px 0; }
-        .features { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 15px 0; }
-        .features span { background: #252540; padding: 8px 12px; border-radius: 8px; font-size: 0.9em; }
-        .desc { color: #aaa; margin: 15px 0; }
-        .btn { display: inline-block; background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 10px; }
-        .btn:hover { transform: translateY(-2px); }
-        .contact { text-align: center; margin-top: 50px; padding: 30px; background: #1a1a2e; border-radius: 16px; border: 1px solid #2a2a4a; }
-        .footer { text-align: center; color: #555; margin-top: 30px; font-size: 0.9em; }
-        @media (max-width: 600px) { .features { grid-template-columns: 1fr; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数字产品小铺</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',system-ui,sans-serif;background:#08090a;color:#d0d6e0;line-height:1.6;-webkit-font-smoothing:antialiased;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,9,10,0.8);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05);}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-weight:600;font-size:16px;color:#f7f8f8;text-decoration:none;}
+.nav-logo span{color:#6c5ce7;}
+.nav-links{display:flex;gap:24px;align-items:center;}
+.nav-links a{color:#8a8f98;text-decoration:none;font-size:14px;transition:color 0.2s;}
+.nav-links a:hover{color:#f7f8f8;}
+.nav-cta{background:#6c5ce7;color:white!important;padding:8px 16px;border-radius:6px;font-weight:500!important;}
+.hero{padding:140px 24px 60px;text-align:center;}
+.hero h1{font-size:52px;font-weight:600;letter-spacing:-1.5px;color:#f7f8f8;margin-bottom:16px;}
+.hero h1 .gradient{background:linear-gradient(135deg,#6c5ce7,#a29bfe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{font-size:18px;color:#8a8f98;max-width:500px;margin:0 auto 32px;}
+.btn{display:inline-block;background:#6c5ce7;color:white;padding:12px 28px;border-radius:6px;text-decoration:none;font-weight:500;}
+.btn:hover{background:#7c6cf0;}
+.section{max-width:1100px;margin:0 auto;padding:60px 24px;}
+.section h2{font-size:32px;font-weight:600;color:#f7f8f8;text-align:center;margin-bottom:40px;letter-spacing:-0.8px;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;transition:all 0.3s;}
+.card:hover{background:rgba(255,255,255,0.06);border-color:rgba(108,92,231,0.3);transform:translateY(-2px);}
+.card.featured{border-color:rgba(108,92,231,0.3);background:rgba(108,92,231,0.05);}
+.card-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;background:rgba(108,92,231,0.12);margin-bottom:12px;}
+.card h3{font-size:18px;font-weight:600;color:#f7f8f8;margin-bottom:6px;}
+.card .desc{font-size:13px;color:#8a8f98;margin-bottom:12px;}
+.card .price{font-size:24px;font-weight:700;color:#f7f8f8;margin-bottom:12px;}
+.tag{display:inline-block;font-size:11px;padding:3px 8px;border-radius:100px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.05);color:#8a8f98;margin:2px;}
+.btn-sm{display:inline-block;background:#6c5ce7;color:white;padding:7px 16px;border-radius:6px;text-decoration:none;font-size:12px;font-weight:500;margin-top:12px;}
+.btn-sm:hover{background:#7c6cf0;}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.step{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:24px;text-align:center;}
+.step-num{width:36px;height:36px;border-radius:50%;background:rgba(108,92,231,0.15);color:#828fff;display:flex;align-items:center;justify-content:center;font-weight:600;margin:0 auto 12px;}
+footer{text-align:center;padding:32px;border-top:1px solid rgba(255,255,255,0.05);color:#62666d;font-size:13px;}
+footer a{color:#828fff;text-decoration:none;}
+@media(max-width:768px){.grid,.steps{grid-template-columns:1fr;}.hero h1{font-size:32px;}}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>🚀 数字产品小铺</h1>
-        <p class="subtitle">AI工具 + Python脚本 · 提升10倍工作效率</p>
 
-        <div class="product">
-            <h2>🤖 超级AI提示词宝典</h2>
-            <p class="price">¥6.6</p>
-            <p class="desc">170条即用Prompt · 覆盖10大场景 · 复制粘贴即用</p>
-            <div class="features">
-                <span>📝 写作助手 22条</span>
-                <span>💻 编程开发 28条</span>
-                <span>🌍 翻译润色 18条</span>
-                <span>📊 数据分析 12条</span>
-                <span>🎨 创意设计 12条</span>
-                <span>🤖 角色扮演 12条</span>
-                <span>📚 学习教育 18条</span>
-                <span>🏢 职场办公 18条</span>
-                <span>🔧 效率工具 12条</span>
-                <span>⚡ 高级技巧 18条</span>
-            </div>
-            <p style="color:#888;font-size:0.9em">适用：ChatGPT / Claude / Kimi / 文心一言</p>
-            <br>
-            <a class="btn" href="awesome-ai-prompts.md" download>📥 下载文件</a>
-        </div>
+<nav>
+<div class="nav-inner">
+<a class="nav-logo">&#10026; <span>数字小铺</span></a>
+<div class="nav-links">
+<a href="#products">商品</a>
+<a href="#how">购买</a>
+<a href="https://github.com/yuhangyuan997/awesome-prompts-and-scripts" target="_blank">GitHub</a>
+<a href="#payment" class="nav-cta">立即购买</a>
+</div>
+</div>
+</nav>
 
-        <div class="product">
-            <h2>🐍 Python办公自动化脚本合集</h2>
-            <p class="price">¥4.9</p>
-            <p class="desc">12个实用脚本 · 一键搞定重复工作</p>
-            <div class="features">
-                <span>📊 merge_excel.py</span>
-                <span>✂️ split_excel.py</span>
-                <span>🔄 excel_to_csv.py</span>
-                <span>📄 merge_pdf.py</span>
-                <span>🏷️ rename_files.py</span>
-                <span>🖼️ compress_images.py</span>
-                <span>🔍 find_duplicate_files.py</span>
-                <span>🔤 convert_encoding.py</span>
-                <span>💾 folder_backup.py</span>
-                <span>🔎 text_search_replace.py</span>
-            </div>
-            <p style="color:#888;font-size:0.9em">环境：Python 3.6+ · pip install openpyxl pillow</p>
-            <br>
-            <a class="btn" href="python-scripts/" target="_blank">📂 查看脚本</a>
-        </div>
+<section class="hero">
+<h1>AI 效率工具<br><span class="gradient">让每天多出2小时</span></h1>
+<p>精选AI提示词 + Python脚本，复制粘贴即用，零门槛上手</p>
+<a href="#products" class="btn">浏览商品 &#8594;</a>
+</section>
 
-        <div class="contact">
-            <h3>💳 购买方式</h3>
-            <p style="margin:15px 0;color:#aaa">扫描下方二维码付款，备注「产品名」</p>
-            <p style="color:#4ade80;font-size:1.2em">付款后凭截图获取完整文件</p>
-            <p style="margin-top:20px;color:#666">联系微信：请添加好友时备注「购买」</p>
-        </div>
+<section class="section" id="products">
+<h2>全部商品</h2>
+<div class="grid">
+<div class="card featured">
+<div class="card-icon">&#129302;</div>
+<h3>超级AI提示词宝典</h3>
+<div class="desc">170条即用Prompt，复制粘贴即用</div>
+<div class="price">&#165;6.6</div>
+<span class="tag">ChatGPT</span><span class="tag">Claude</span><span class="tag">Kimi</span>
+<a href="#payment" class="btn-sm">立即购买</a>
+</div>
 
-        <div class="footer">
-            <p>© 2025 数字产品小铺 · 所有产品均为原创</p>
-        </div>
-    </div>
+<div class="card">
+<div class="card-icon" style="background:rgba(16,185,129,0.12)">&#128009;</div>
+<h3>Python办公自动化脚本</h3>
+<div class="desc">12个实用脚本，一键搞定重复工作</div>
+<div class="price">&#165;4.9</div>
+<span class="tag">Python</span><span class="tag">办公自动化</span>
+<a href="#payment" class="btn-sm">立即购买</a>
+</div>
+
+<div class="card">
+<div class="card-icon" style="background:rgba(251,146,60,0.12)">&#127919;</div>
+<h3>超值组合包</h3>
+<div class="desc">AI提示词 + Python脚本合集</div>
+<div class="price">&#165;9.9 <span style="font-size:14px;color:#62666d;font-weight:400;">原价11.5</span></div>
+<span class="tag">超值</span><span class="tag">省1.6</span>
+<a href="#payment" class="btn-sm">立即购买</a>
+</div>
+
+<div class="card">
+<div class="card-icon" style="background:rgba(99,102,241,0.12)">&#128679;</div>
+<h3>更多产品即将上线</h3>
+<div class="desc">macOS效率工具包、Notion模板、提示词进阶版</div>
+<div class="price">敬请期待</div>
+<span class="tag">开发中</span>
+<a href="https://github.com/yuhangyuan997/awesome-prompts-and-scripts" class="btn-sm" style="background:rgba(255,255,255,0.06);color:#d0d6e0;" target="_blank">关注更新</a>
+</div>
+</div>
+</section>
+
+<section class="section" id="how">
+<h2>购买指南</h2>
+<div class="steps">
+<div class="step"><div class="step-num">1</div><h3 style="font-size:15px;color:#f7f8f8;margin-bottom:6px;">选择商品</h3><p style="font-size:13px;color:#8a8f98;">浏览商品列表，选择你需要的产品</p></div>
+<div class="step"><div class="step-num">2</div><h3 style="font-size:15px;color:#f7f8f8;margin-bottom:6px;">扫码付款</h3><p style="font-size:13px;color:#8a8f98;">使用微信/支付宝支付对应金额</p></div>
+<div class="step"><div class="step-num">3</div><h3 style="font-size:15px;color:#f7f8f8;margin-bottom:6px;">获取文件</h3><p style="font-size:13px;color:#8a8f98;">付款后截图发送，即可获取下载链接</p></div>
+</div>
+</section>
+
+<section class="section" id="payment" style="text-align:center;">
+<div style="background:#0f1011;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:40px;">
+<h2>付款方式</h2>
+<p style="color:#8a8f98;margin-bottom:20px;">扫码付款后，截图联系我们获取文件</p>
+<div style="width:160px;height:160px;background:#191a1b;border:2px dashed rgba(255,255,255,0.08);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:13px;color:#62666d;">请联系获取收款码</div>
+<p style="font-size:13px;color:#62666d;">付款请备注商品名称</p>
+</div>
+</section>
+
+<footer>
+<p>&#10026; <a href="https://github.com/yuhangyuan997/awesome-prompts-and-scripts" target="_blank">GitHub 仓库</a></p>
+</footer>
 </body>
 </html>
