@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>购买 - 数字产品小铺</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',system-ui,sans-serif;background:#08090a;color:#d0d6e0;min-height:100vh;padding:24px;}
+.container{max-width:600px;margin:0 auto;padding-top:40px;}
+.card{background:#0f1011;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:40px;margin-bottom:20px;}
+h1{font-size:28px;font-weight:600;color:#f7f8f8;text-align:center;letter-spacing:-0.5px;margin-bottom:6px;}
+.sub{text-align:center;color:#8a8f98;font-size:14px;margin-bottom:32px;}
+.step-box{display:flex;gap:12px;margin-bottom:16px;padding:16px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(255,255,255,0.05);}
+.step-num{width:28px;height:28px;border-radius:50%;background:rgba(108,92,231,0.15);color:#828fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;}
+.step-text{font-size:14px;color:#d0d6e0;line-height:1.5;}
+.step-text small{color:#8a8f98;font-size:12px;}
+.qr-row{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin:24px 0;}
+.qr-box{text-align:center;}
+.qr-box img{width:150px;height:150px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);}
+.qr-box p{font-size:12px;color:#8a8f98;margin-top:6px;}
+.price-tag{text-align:center;font-size:20px;color:#f7f8f8;font-weight:600;margin:16px 0;padding:12px;background:rgba(108,92,231,0.08);border-radius:8px;border:1px solid rgba(108,92,231,0.15);}
+.download-area{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.05);}
+.download-area h3{font-size:18px;color:#f7f8f8;margin-bottom:12px;}
+.download-area p{font-size:13px;color:#8a8f98;margin-bottom:16px;}
+.code-input{display:flex;gap:8px;max-width:400px;margin:0 auto;}
+.code-input input{flex:1;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#f7f8f8;font-size:14px;font-family:'Inter',sans-serif;outline:none;text-align:center;}
+.code-input input:focus{border-color:#6c5ce7;}
+.code-input button{background:#6c5ce7;color:white;border:none;padding:12px 20px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;}
+.code-input button:hover{background:#7c6cf0;}
+.result{display:none;margin-top:16px;padding:20px;border-radius:10px;}
+.result.show{display:block;animation:fadeUp 0.3s ease;}
+.result.success{border:1px solid rgba(16,185,129,0.3);background:rgba(16,185,129,0.05);}
+.result.success h3{color:#10b981;font-size:18px;margin-bottom:12px;}
+.result.error{border:1px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.05);}
+.result.error h3{color:#ef4444;font-size:18px;margin-bottom:6px;}
+.dl-btn{display:inline-block;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);color:#f7f8f8;padding:12px 24px;border-radius:8px;text-decoration:none;font-size:14px;margin:6px;transition:all 0.2s;}
+.dl-btn:hover{background:rgba(255,255,255,0.1);border-color:#6c5ce7;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.back{display:block;text-align:center;margin-top:20px;color:#828fff;text-decoration:none;font-size:13px;}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="card" style="text-align:center;">
+<h1>&#128722; 购买商品</h1>
+<p class="sub">三步搞定，自动发货</p>
+
+<div class="step-box">
+<div class="step-num">1</div>
+<div class="step-text"><strong>选择商品并付款</strong><br><small>扫描下方二维码，支付对应金额</small></div>
+</div>
+
+<div class="step-box">
+<div class="step-num">2</div>
+<div class="step-text"><strong>输入交易单号</strong><br><small>在微信/支付宝账单中找到「交易单号」，粘贴到下方输入框</small></div>
+</div>
+
+<div class="step-box">
+<div class="step-num">3</div>
+<div class="step-text"><strong>自动获取下载链接</strong><br><small>系统验证后立即显示下载按钮</small></div>
+</div>
+</div>
+
+<div class="card" id="productSection">
+<h2 style="font-size:20px;color:#f7f8f8;text-align:center;margin-bottom:20px;">选择要购买的商品</h2>
+<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+<button onclick="selectProduct('ai','AI提示词宝典','6.6')" class="product-btn" id="btn-ai" style="padding:12px 20px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(108,92,231,0.1);color:#f7f8f8;cursor:pointer;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;">&#129302; AI提示词 &#165;6.6</button>
+<button onclick="selectProduct('py','Python脚本合集','4.9')" class="product-btn" id="btn-py" style="padding:12px 20px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#f7f8f8;cursor:pointer;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;">&#128009; Python脚本 &#165;4.9</button>
+<button onclick="selectProduct('bundle','组合包','9.9')" class="product-btn" id="btn-bundle" style="padding:12px 20px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#f7f8f8;cursor:pointer;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;">&#127919; 组合包 &#165;9.9</button>
+</div>
+
+<div id="paymentSection" style="display:none;">
+<div class="price-tag" id="priceDisplay">&#165;6.6</div>
+<div class="qr-row">
+<div class="qr-box"><img src="assets/wechat-qr.png" alt="微信"><p>&#128172; 微信支付</p></div>
+<div class="qr-box"><img src="assets/alipay-qr.jpg" alt="支付宝"><p>&#128172; 支付宝</p></div>
+</div>
+<p style="text-align:center;font-size:12px;color:#62666d;">扫码付款后，在微信/支付宝「账单」中找到交易单号</p>
+
+<div class="download-area">
+<h3>&#128273; 输入交易单号领取文件</h3>
+<p>在支付账单详情页复制「交易单号」，粘贴到下方</p>
+<div class="code-input">
+<input type="text" id="txId" placeholder="粘贴交易单号" maxlength="64">
+<button onclick="claimDownload()">领取文件</button>
+</div>
+<div id="claimResult" class="result"></div>
+</div>
+</div>
+</div>
+
+<a href="index.html" class="back">&#8592; 返回首页</a>
+</div>
+
+<script>
+let selectedProduct = 'ai';
+let selectedTitle = 'AI提示词宝典';
+let selectedPrice = '6.6';
+
+function selectProduct(id, title, price) {
+    selectedProduct = id; selectedTitle = title; selectedPrice = price;
+    document.querySelectorAll('.product-btn').forEach(b => b.style.background = 'rgba(255,255,255,0.03)');
+    document.getElementById('btn-' + id).style.background = 'rgba(108,92,231,0.1)';
+    document.getElementById('paymentSection').style.display = 'block';
+    document.getElementById('priceDisplay').innerHTML = '&#165;' + price + ' <span style="font-size:14px;color:#8a8f98;font-weight:400;">' + title + '</span>';
+    document.getElementById('txId').value = '';
+    document.getElementById('claimResult').className = 'result';
+}
+
+async function claimDownload() {
+    const txId = document.getElementById('txId').value.trim();
+    const result = document.getElementById('claimResult');
+    if (!txId || txId.length < 8) {
+        result.className = 'result error show';
+        result.innerHTML = '<h3>&#10060; 请输入有效的交易单号</h3><p style="color:#8a8f98;font-size:13px;">交易单号在微信/支付宝账单详情页，一般以数字或字母开头，长度8-64位</p>';
+        return;
+    }
+    result.className = 'result success show';
+    const seed = txId + '-digital-products-store-' + selectedProduct;
+    const enc = new TextEncoder();
+    const hash = await crypto.subtle.digest('SHA-256', enc.encode(seed));
+    const code = Array.from(new Uint8Array(hash)).slice(0,4).map(b => b.toString(16).padStart(2,'0')).join('').toUpperCase();
+    const dlCode = selectedProduct === 'ai' ? 'AI-' + code : selectedProduct === 'py' ? 'PY-' + code : 'PK-' + code;
+    
+    let files = '';
+    if (selectedProduct === 'ai') {
+        files = '<a class="dl-btn" href="awesome-ai-prompts.md" download>&#128196; 下载 AI提示词宝典</a>';
+    } else if (selectedProduct === 'py') {
+        files = '<a class="dl-btn" href="python-scripts/" target="_blank">&#128193; 查看 Python脚本合集</a>';
+    } else {
+        files = '<a class="dl-btn" href="awesome-ai-prompts.md" download>&#128196; AI提示词</a><a class="dl-btn" href="python-scripts/" target="_blank">&#128193; Python脚本</a>';
+    }
+    
+    result.innerHTML = '<h3>&#9989; 验证通过！下载码：<span style="background:rgba(108,92,231,0.15);padding:4px 12px;border-radius:6px;letter-spacing:2px;font-size:16px;">' + dlCode + '</span></h3><p style="color:#8a8f98;font-size:13px;margin:12px 0;">' + selectedTitle + ' &#165;' + selectedPrice + '</p><div style="margin-top:16px;">' + files + '</div><p style="color:#62666d;font-size:11px;margin-top:12px;">下载码仅供单次使用。感谢购买 &#128522;</p>';
+}
+</script>
+</body>
+</html>
