@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>下载中心 - 数字产品小铺</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',system-ui,sans-serif;background:#08090a;color:#d0d6e0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
+.card{background:#0f1011;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:48px;max-width:480px;width:100%;text-align:center;}
+h1{font-size:28px;font-weight:600;color:#f7f8f8;margin-bottom:8px;letter-spacing:-0.5px;}
+.sub{color:#8a8f98;font-size:14px;margin-bottom:32px;}
+.input-group{display:flex;gap:8px;margin-bottom:12px;}
+input{flex:1;padding:12px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#f7f8f8;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s;text-align:center;letter-spacing:2px;text-transform:uppercase;}
+input:focus{border-color:#6c5ce7;}
+input::placeholder{color:#62666d;letter-spacing:0;}
+button{background:#6c5ce7;color:white;border:none;padding:12px 24px;border-radius:8px;font-size:15px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:background 0.2s;white-space:nowrap;}
+button:hover{background:#7c6cf0;}
+button:disabled{opacity:0.5;cursor:not-allowed;}
+.result{margin-top:24px;display:none;}
+.result.show{display:block;animation:fadeUp 0.4s ease;}
+.result.success{border:1px solid rgba(16,185,129,0.3);background:rgba(16,185,129,0.05);border-radius:12px;padding:24px;}
+.result.success h2{color:#10b981;font-size:20px;margin-bottom:16px;}
+.result.error{border:1px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.05);}
+.result.error h2{color:#ef4444;font-size:20px;margin-bottom:8px;}
+.dl-btn{display:block;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);color:#f7f8f8;padding:12px 20px;border-radius:8px;text-decoration:none;margin:8px 0;font-size:14px;transition:all 0.2s;}
+.dl-btn:hover{background:rgba(255,255,255,0.1);border-color:#6c5ce7;}
+.back{display:inline-block;margin-top:16px;color:#828fff;text-decoration:none;font-size:13px;}
+.back:hover{text-decoration:underline;}
+.hint{font-size:12px;color:#62666d;margin-top:8px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+p{font-size:13px;color:#62666d;margin-top:8px;line-height:1.5;}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>&#128274; 下载中心</h1>
+<p class="sub">付款后，输入收到的下载码即可获取文件</p>
+<div class="input-group">
+<input type="text" id="codeInput" placeholder="输入下载码" maxlength="20" autocomplete="off">
+<button id="verifyBtn" onclick="verifyCode()">验证</button>
+</div>
+<div id="result" class="result"></div>
+<p>还没有下载码？<a href="index.html#payment" style="color:#828fff;">先去购买 &#8594;</a></p>
+</div>
+
+<script>
+async function verifyCode() {
+    const code = document.getElementById('codeInput').value.trim().toUpperCase();
+    const result = document.getElementById('result');
+    const btn = document.getElementById('verifyBtn');
+    if (!code) { result.className = 'result error show'; result.innerHTML = '<h2>&#10060; 请输入下载码</h2>'; return; }
+    btn.disabled = true; btn.textContent = '验证中...';
+    try {
+        const resp = await fetch('assets/codes.json');
+        const data = await resp.json();
+        const encoder = new TextEncoder();
+        const hash = await crypto.subtle.digest('SHA-256', encoder.encode(code));
+        const hashHex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+        if (data[hashHex]) {
+            const product = data[hashHex];
+            let title, price, files = '';
+            if (product === 'ai-prompts') {
+                title = '&#129302; 超级AI提示词宝典'; price = '&#165;6.6';
+                files = '<a class="dl-btn" href="awesome-ai-prompts.md" download>&#128196; 下载 AI提示词宝典 .md</a>';
+            } else if (product === 'python-scripts') {
+                title = '&#128009; Python办公自动化脚本'; price = '&#165;4.9';
+                files = '<a class="dl-btn" href="python-scripts/" target="_blank">&#128193; 查看脚本合集</a>';
+            } else {
+                title = '&#127919; 超值组合包'; price = '&#165;9.9';
+                files = '<a class="dl-btn" href="awesome-ai-prompts.md" download>&#128196; AI提示词宝典</a><a class="dl-btn" href="python-scripts/" target="_blank">&#128193; Python脚本合集</a>';
+            }
+            result.className = 'result success show';
+            result.innerHTML = '<h2>&#9989; 验证成功！</h2><p style="color:#d0d6e0;">' + title + '<br><span style="color:#8a8f98;font-size:13px;">' + price + '</span></p><div style="margin-top:16px;">' + files + '</div><p class="hint">感谢购买！文件归你所有 &#128522;</p>';
+        } else {
+            result.className = 'result error show';
+            result.innerHTML = '<h2>&#10060; 下载码无效</h2><p style="color:#8a8f98;">请检查输入是否正确，或联系卖家获取有效下载码</p>';
+        }
+    } catch(e) {
+        result.className = 'result error show';
+        result.innerHTML = '<h2>&#10060; 验证失败</h2><p style="color:#8a8f98;">请检查网络后重试</p>';
+    }
+    btn.disabled = false; btn.textContent = '验证';
+}
+document.getElementById('codeInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') verifyCode();
+});
+</script>
+</body>
+</html>
