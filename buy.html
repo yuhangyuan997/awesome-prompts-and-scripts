@@ -96,14 +96,25 @@ h1{font-size:28px;font-weight:600;color:#f7f8f8;text-align:center;letter-spacing
 </div>
 
 <script>
-let selectedProduct = 'ai';
-let selectedTitle = 'AI提示词宝典';
-let selectedPrice = '6.6';
+// Auto-select product from URL parameter
+const urlParams = new URLSearchParams(window.location.search);
+const defaultProduct = urlParams.get('product') || 'ai';
+
+const productMap = {
+    'ai': { title: 'AI提示词宝典', price: '6.6' },
+    'py': { title: 'Python脚本合集', price: '4.9' },
+    'bundle': { title: '组合包', price: '9.9' }
+};
+
+let selectedProduct = defaultProduct;
+let selectedTitle = productMap[defaultProduct].title;
+let selectedPrice = productMap[defaultProduct].price;
 
 function selectProduct(id, title, price) {
     selectedProduct = id; selectedTitle = title; selectedPrice = price;
     document.querySelectorAll('.product-btn').forEach(b => b.style.background = 'rgba(255,255,255,0.03)');
-    document.getElementById('btn-' + id).style.background = 'rgba(108,92,231,0.1)';
+    const btn = document.getElementById('btn-' + id);
+    if (btn) btn.style.background = 'rgba(108,92,231,0.1)';
     document.getElementById('paymentSection').style.display = 'block';
     document.getElementById('priceDisplay').innerHTML = '&#165;' + price + ' <span style="font-size:14px;color:#8a8f98;font-weight:400;">' + title + '</span>';
     document.getElementById('txId').value = '';
@@ -136,6 +147,10 @@ async function claimDownload() {
     
     result.innerHTML = '<h3>&#9989; 验证通过！下载码：<span style="background:rgba(108,92,231,0.15);padding:4px 12px;border-radius:6px;letter-spacing:2px;font-size:16px;">' + dlCode + '</span></h3><p style="color:#8a8f98;font-size:13px;margin:12px 0;">' + selectedTitle + ' &#165;' + selectedPrice + '</p><div style="margin-top:16px;">' + files + '</div><p style="color:#62666d;font-size:11px;margin-top:12px;">下载码仅供单次使用。感谢购买 &#128522;</p>';
 }
+// Auto-select on page load
+window.addEventListener('DOMContentLoaded', function() {
+    selectProduct(selectedProduct, selectedTitle, selectedPrice);
+});
 </script>
 </body>
 </html>
