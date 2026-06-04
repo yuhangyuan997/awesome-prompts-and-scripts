@@ -76,9 +76,9 @@ h1{font-size:28px;font-weight:600;color:#f7f8f8;letter-spacing:-0.5px;margin-bot
 <div class="switch-area">
 <p>想换其他商品？</p>
 <div>
-<button class="switch-btn" id="btn-ai" onclick="selectProduct('ai')">🤖 AI提示词 ¥6.6</button>
-<button class="switch-btn" id="btn-py" onclick="selectProduct('py')">🐍 Python脚本 ¥4.9</button>
-<button class="switch-btn" id="btn-bundle" onclick="selectProduct('bundle')">🎯 组合包 ¥9.9</button>
+<button class="switch-btn" id="btn-ai" onclick="selectProduct('ai')">🤖 AI提示词 ¥1.3</button>
+<button class="switch-btn" id="btn-py" onclick="selectProduct('py')">🐍 Python脚本 ¥1.0</button>
+<button class="switch-btn" id="btn-bundle" onclick="selectProduct('bundle')">🎯 组合包 ¥2.0</button>
 </div>
 </div>
 </div>
@@ -86,9 +86,9 @@ h1{font-size:28px;font-weight:600;color:#f7f8f8;letter-spacing:-0.5px;margin-bot
 </div>
 <script>
 var pdata = {
-    ai: {icon: "🤖", name: "AI提示词宝典", price: "¥6.6", desc: "170条即用Prompt · 覆盖10大场景"},
-    py: {icon: "🐍", name: "Python办公自动化脚本", price: "¥4.9", desc: "12个实用脚本 · 一键搞定重复工作"},
-    bundle: {icon: "🎯", name: "超值组合包", price: "¥9.9", desc: "AI提示词 + Python脚本合集 · 省¥1.6"}
+    ai: {icon: "🤖", name: "AI提示词宝典", price: "¥1.3", desc: "170条即用Prompt · 覆盖10大场景"},
+    py: {icon: "🐍", name: "Python办公自动化脚本", price: "¥1.0", desc: "12个实用脚本 · 一键搞定重复工作"},
+    bundle: {icon: "🎯", name: "超值组合包", price: "¥2.0", desc: "AI提示词 + Python脚本合集 · 省¥1.6"}
 };
 var params = new URLSearchParams(window.location.search);
 var cur = params.get('product') || 'ai';
