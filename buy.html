@@ -4,6 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>购买 - 数字产品小铺</title>
+<script>
+// Run immediately - no waiting for DOM
+(function() {
+    var params = new URLSearchParams(window.location.search);
+    var product = params.get('product') || 'ai';
+    var data = {
+        'ai': {icon: '&#129302;', name: 'AI提示词宝典', price: '&#165;6.6', desc: '170条即用Prompt &middot; 复制粘贴即用'},
+        'py': {icon: '&#128009;', name: 'Python办公自动化脚本', price: '&#165;4.9', desc: '12个实用脚本 &middot; 一键搞定重复工作'},
+        'bundle': {icon: '&#127919;', name: '超值组合包', price: '&#165;9.9', desc: 'AI提示词 + Python脚本合集 &middot; 省&#165;1.6'}
+    };
+    // Store for later use
+    window._initialProduct = product;
+    window._productData = data;
+})();
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -106,7 +122,7 @@ h1{font-size:28px;font-weight:600;color:#f7f8f8;text-align:center;letter-spacing
 <script>
 // Auto-select product from URL parameter
 const urlParams = new URLSearchParams(window.location.search);
-const defaultProduct = urlParams.get('product') || 'ai';
+const defaultProduct = window._initialProduct || urlParams.get('product') || 'ai';
 
 const productMap = {
     'ai': { title: 'AI提示词宝典', price: '6.6' },
@@ -130,6 +146,9 @@ function selectProduct(id, title, price) {
     document.getElementById('productIconDisplay').innerHTML = icons[id] || '&#129302;';
     document.getElementById('productNameDisplay').textContent = title;
     document.getElementById('productPriceDisplay').innerHTML = '&#165;' + price;
+    const descs = {'ai':'170条即用Prompt &middot; 复制粘贴即用','py':'12个实用脚本 &middot; 一键搞定重复工作','bundle':'AI提示词 + Python脚本合集 &middot; 省&#165;1.6'};
+    document.getElementById('productDescDisplay').textContent = descs[id] || '';
+    document.getElementById('productDescDisplay').style.display = 'block';
     // Update price tag
     const pt = document.getElementById('priceDisplay');
     if (pt) pt.innerHTML = '&#165;' + price + ' <span style="font-size:14px;color:#8a8f98;font-weight:400;">' + title + '</span>';
@@ -164,7 +183,16 @@ async function claimDownload() {
     
     result.innerHTML = '<h3>&#9989; 验证通过！下载码：<span style="background:rgba(108,92,231,0.15);padding:4px 12px;border-radius:6px;letter-spacing:2px;font-size:16px;">' + dlCode + '</span></h3><p style="color:#8a8f98;font-size:13px;margin:12px 0;">' + selectedTitle + ' &#165;' + selectedPrice + '</p><div style="margin-top:16px;">' + files + '</div><p style="color:#62666d;font-size:11px;margin-top:12px;">下载码仅供单次使用。感谢购买 &#128522;</p>';
 }
-// Auto-select on page load
+// Auto-select on page load - run immediately
+(function() {
+    var p = window._initialProduct || 'ai';
+    var d = window._productData || {};
+    var info = d[p] || {icon:'&#129302;',name:'AI提示词宝典',price:'&#165;6.6',desc:''};
+    document.getElementById('productIconDisplay').innerHTML = info.icon;
+    document.getElementById('productNameDisplay').textContent = info.name;
+    document.getElementById('productPriceDisplay').innerHTML = info.price;
+    document.getElementById('productDescDisplay').textContent = info.desc;
+})();
 window.addEventListener('DOMContentLoaded', function() {
     selectProduct(selectedProduct, selectedTitle, selectedPrice);
 });
