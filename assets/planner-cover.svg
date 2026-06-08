@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="800" y2="800">
+      <stop offset="0%" stop-color="#0f0f12"/>
+      <stop offset="50%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0f0f12"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="800" height="800" fill="url(#bg)"/>
+  <circle cx="650" cy="150" r="350" fill="#6366f1" opacity="0.04"/>
+  <circle cx="150" cy="700" r="280" fill="#8b5cf6" opacity="0.03"/>
+  <!-- Grid dots full frame -->
+  <g fill="#6366f1" opacity="0.06">
+    <circle cx="0" cy="0" r="2"/><circle cx="80" cy="0" r="2"/><circle cx="160" cy="0" r="2"/><circle cx="240" cy="0" r="2"/><circle cx="320" cy="0" r="2"/><circle cx="400" cy="0" r="2"/><circle cx="480" cy="0" r="2"/><circle cx="560" cy="0" r="2"/><circle cx="640" cy="0" r="2"/><circle cx="720" cy="0" r="2"/><circle cx="800" cy="0" r="2"/>
+    <circle cx="0" cy="100" r="2"/><circle cx="100" cy="100" r="2"/><circle cx="200" cy="100" r="2"/><circle cx="300" cy="100" r="2"/><circle cx="400" cy="100" r="2"/><circle cx="500" cy="100" r="2"/><circle cx="600" cy="100" r="2"/><circle cx="700" cy="100" r="2"/><circle cx="800" cy="100" r="2"/>
+    <circle cx="0" cy="200" r="2"/><circle cx="200" cy="200" r="2"/><circle cx="400" cy="200" r="2"/><circle cx="600" cy="200" r="2"/><circle cx="800" cy="200" r="2"/>
+    <circle cx="0" cy="300" r="2"/><circle cx="200" cy="300" r="2"/><circle cx="400" cy="300" r="2"/><circle cx="600" cy="300" r="2"/><circle cx="800" cy="300" r="2"/>
+    <circle cx="0" cy="400" r="2"/><circle cx="200" cy="400" r="2"/><circle cx="400" cy="400" r="2"/><circle cx="600" cy="400" r="2"/><circle cx="800" cy="400" r="2"/>
+    <circle cx="0" cy="500" r="2"/><circle cx="200" cy="500" r="2"/><circle cx="400" cy="500" r="2"/><circle cx="600" cy="500" r="2"/><circle cx="800" cy="500" r="2"/>
+    <circle cx="0" cy="600" r="2"/><circle cx="200" cy="600" r="2"/><circle cx="400" cy="600" r="2"/><circle cx="600" cy="600" r="2"/><circle cx="800" cy="600" r="2"/>
+    <circle cx="0" cy="700" r="2"/><circle cx="200" cy="700" r="2"/><circle cx="400" cy="700" r="2"/><circle cx="600" cy="700" r="2"/><circle cx="800" cy="700" r="2"/>
+    <circle cx="0" cy="800" r="2"/><circle cx="100" cy="800" r="2"/><circle cx="200" cy="800" r="2"/><circle cx="300" cy="800" r="2"/><circle cx="400" cy="800" r="2"/><circle cx="500" cy="800" r="2"/><circle cx="600" cy="800" r="2"/><circle cx="700" cy="800" r="2"/><circle cx="800" cy="800" r="2"/>
+  </g>
+  <!-- Full-width top bar -->
+  <rect x="0" y="0" width="800" height="4" fill="url(#accent)"/>
+  <!-- Top pill badge -->
+  <rect x="300" y="50" width="200" height="34" rx="17" fill="#6366f1" opacity="0.15"/>
+  <text x="400" y="72" text-anchor="middle" fill="#a5b4fc" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="3">DIGITAL PLANNER</text>
+  <!-- Main title - pushed higher for full feeling -->
+  <text x="400" y="155" text-anchor="middle" fill="white" font-family="Helvetica,Arial,sans-serif" font-size="58" font-weight="800" letter-spacing="3">WEEKLY</text>
+  <text x="400" y="225" text-anchor="middle" fill="url(#accent)" font-family="Helvetica,Arial,sans-serif" font-size="52" font-weight="800" letter-spacing="2">PLANNER</text>
+  <text x="400" y="270" text-anchor="middle" fill="#c4b5fd" font-family="Helvetica,Arial,sans-serif" font-size="20" font-weight="600">BUNDLE</text>
+  <!-- Color swatches - bigger, more prominent -->
+  <rect x="260" y="315" width="18" height="18" rx="9" fill="#84cc16" stroke="#84cc16" stroke-opacity="0.5" stroke-width="2"/>
+  <rect x="310" y="315" width="18" height="18" rx="9" fill="#60a5fa" stroke="#60a5fa" stroke-opacity="0.5" stroke-width="2"/>
+  <rect x="360" y="315" width="18" height="18" rx="9" fill="#fb923c" stroke="#fb923c" stroke-opacity="0.5" stroke-width="2"/>
+  <text x="400" y="330" fill="#94a3b8" font-family="Helvetica,Arial,sans-serif" font-size="14">Sage Green  •  Dusty Blue  •  Warm Terracotta</text>
+  <!-- Feature badges - fill the width -->
+  <rect x="60" y="370" width="195" height="40" rx="20" fill="none" stroke="#6366f1" stroke-opacity="0.3"/>
+  <text x="157" y="395" text-anchor="middle" fill="#a5b4fc" font-family="Helvetica,Arial,sans-serif" font-size="14" font-weight="600">📄 A4 Printable</text>
+  <rect x="280" y="370" width="240" height="40" rx="20" fill="none" stroke="#6366f1" stroke-opacity="0.3"/>
+  <text x="400" y="395" text-anchor="middle" fill="#a5b4fc" font-family="Helvetica,Arial,sans-serif" font-size="14" font-weight="600">📱 Goodnotes Fillable</text>
+  <rect x="545" y="370" width="195" height="40" rx="20" fill="none" stroke="#6366f1" stroke-opacity="0.3"/>
+  <text x="642" y="395" text-anchor="middle" fill="#a5b4fc" font-family="Helvetica,Arial,sans-serif" font-size="14" font-weight="600">🎨 3 Color Schemes</text>
+  <!-- Stats boxes - full-width row -->
+  <rect x="60" y="445" width="150" height="65" rx="12" fill="#6366f1" opacity="0.08"/>
+  <text x="135" y="478" text-anchor="middle" fill="white" font-family="Helvetica,Arial,sans-serif" font-size="30" font-weight="800">4</text>
+  <text x="135" y="498" text-anchor="middle" fill="#64748b" font-family="Helvetica,Arial,sans-serif" font-size="10" letter-spacing="1">MODULES</text>
+  <rect x="230" y="445" width="150" height="65" rx="12" fill="#6366f1" opacity="0.08"/>
+  <text x="305" y="478" text-anchor="middle" fill="white" font-family="Helvetica,Arial,sans-serif" font-size="30" font-weight="800">8</text>
+  <text x="305" y="498" text-anchor="middle" fill="#64748b" font-family="Helvetica,Arial,sans-serif" font-size="10" letter-spacing="1">HABITS</text>
+  <rect x="400" y="445" width="150" height="65" rx="12" fill="#6366f1" opacity="0.08"/>
+  <text x="475" y="478" text-anchor="middle" fill="white" font-family="Helvetica,Arial,sans-serif" font-size="30" font-weight="800">3</text>
+  <text x="475" y="498" text-anchor="middle" fill="#64748b" font-family="Helvetica,Arial,sans-serif" font-size="10" letter-spacing="1">COLORS</text>
+  <rect x="570" y="445" width="170" height="65" rx="12" fill="#6366f1" opacity="0.08"/>
+  <text x="655" y="478" text-anchor="middle" fill="white" font-family="Helvetica,Arial,sans-serif" font-size="30" font-weight="800">∞</text>
+  <text x="655" y="498" text-anchor="middle" fill="#64748b" font-family="Helvetica,Arial,sans-serif" font-size="10" letter-spacing="1">REUSABLE</text>
+  <!-- Full-width divider -->
+  <rect x="0" y="545" width="800" height="1" fill="#6366f1" opacity="0.1"/>
+  <!-- Tagline -->
+  <text x="400" y="580" text-anchor="middle" fill="#94a3b8" font-family="Helvetica,Arial,sans-serif" font-size="15">Weekly Plan  •  Habit Tracker  •  Goals  •  Journal  •  Undated</text>
+  <!-- Bottom bar with price -->
+  <rect x="0" y="740" width="800" height="60" fill="#6366f1" opacity="0.06"/>
+  <text x="200" y="776" text-anchor="middle" fill="#64748b" font-family="Helvetica,Arial,sans-serif" font-size="11" letter-spacing="2">POLARIS STUDIO</text>
+  <!-- PWYW Price badge -->
+  <rect x="520" y="745" width="230" height="50" rx="25" fill="url(#gold)"/>
+  <text x="635" y="768" text-anchor="middle" fill="black" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="700">Pay What You Want</text>
+  <text x="635" y="786" text-anchor="middle" fill="black" font-family="Helvetica,Arial,sans-serif" font-size="16" font-weight="800">from $0.99</text>
+</svg>
